@@ -14,6 +14,12 @@ class SeBackendSpecAbstract(models.AbstractModel):
         store=True,
         required=False,
     )
+    # declare a unique name for this search engine service
+    # (eg: elasticsearch, algolia, my-super-engine).
+    # This can be used by other modules to understand
+    # which engine they are dealing with
+    _search_engine_name = ""
+
     # Delegation inheritance
     se_backend_id = fields.Many2one(
         comodel_name="se.backend",
@@ -40,22 +46,3 @@ class SeBackendSpecAbstract(models.AbstractModel):
         # TODO: user self.name to retrieve creds from server env
         # TODO: username password etc
         return {}  # pragma: no cover
-<<<<<<< HEAD
-=======
-
-    @api.onchange("name")
-    def onchange_backend_name(self):
-        if self.index_ids:
-            return {
-                "warning": {
-                    "title": _("Warning"),
-                    "message": _(
-                        "Changing this name will change the name of "
-                        "the indexes. If you proceed, you have to "
-                        "take care of the configuration in your "
-                        "website. Cancel the modification if you are"
-                        " not comfortable with this configuration."
-                    ),
-                }
-            }
->>>>>>> [IMP] Harmonize code formatting thanks to Black

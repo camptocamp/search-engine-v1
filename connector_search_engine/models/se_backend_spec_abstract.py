@@ -9,11 +9,6 @@ class SeBackendSpecAbstract(models.AbstractModel):
     _description = "Se Specialized Backend"
     _inherit = "connector.backend"
 
-    name = fields.Char(
-        related='se_backend_id.name',
-        store=True,
-        required=False,
-    )
     # declare a unique name for this search engine service
     # (eg: elasticsearch, algolia, my-super-engine).
     # This can be used by other modules to understand

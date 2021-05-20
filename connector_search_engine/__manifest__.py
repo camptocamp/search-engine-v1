@@ -4,7 +4,7 @@
 
 {
     "name": "Connector Search Engine",
-    "version": "13.0.2.6.1",
+    "version": "14.0.1.0.0",
     "author": "Akretion,"
     "ACSONE SA/NV,"
     "Camptocamp,"
@@ -35,5 +35,5 @@
         'data/ir_cron.xml',
         'security/ir.model.access.csv',
     ],
-    "installable": False,
+    "installable": True,
 }

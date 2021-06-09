@@ -23,6 +23,7 @@
                         <field name="index_ids" nolabel="1"
                                context="{'backend_id': active_id, 'backend_model': active_model}">
                             <tree string="Index" editable="bottom">
+                                <field name="custom_tech_name" optional="hide" />
                                 <field name="name" />
                                 <field name="lang_id" />
                                 <field name="model_id" />

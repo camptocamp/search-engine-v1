@@ -40,7 +40,7 @@ class TestSeBackendCaseBase(SavepointComponentCase):
 
     @classmethod
     def _load_fixture(cls, fixture, module="connector_search_engine"):
-        load_xml(cls.env, module, "tests/fixtures/%s" % fixture)
+        load_xml(cls.env, module, f"tests/fixtures/{fixture}")
 
     @staticmethod
     def parse_path(url):

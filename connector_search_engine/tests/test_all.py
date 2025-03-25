@@ -1,7 +1,8 @@
 # Copyright 2018 Simone Orsi - Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import mock
+from unittest import mock
+
 from odoo_test_helper import FakeModelLoader
 
 from odoo.tests.common import Form
@@ -416,5 +417,6 @@ class TestBindingIndex(TestBindingIndexBaseFake):
         res = self.partner_binding.recompute_json()
         self.assertEqual(
             res,
-            f"Validation errors:\n\n  The key `id` is missing - IDs: {self.partner_binding.id}",
+            f"Validation errors:\n\n  "
+            f"The key `id` is missing - IDs: {self.partner_binding.id}",
         )

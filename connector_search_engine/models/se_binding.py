@@ -54,7 +54,7 @@ class SeBinding(models.AbstractModel):
         compute="_compute_data_display",
         help="Include this in debug mode to be able to inspect index data.",
     )
-    active = fields.Boolean(string="Active", default=True)
+    active = fields.Boolean(default=True)
 
     @api.depends("data")
     def _compute_data_display(self):
@@ -75,7 +75,7 @@ class SeBinding(models.AbstractModel):
 
     @api.model
     def create(self, vals):
-        record = super(SeBinding, self).create(vals)
+        record = super().create(vals)
         record.jobify_recompute_json()
         return record
 
@@ -212,7 +212,7 @@ class SeBinding(models.AbstractModel):
         return "\n\n".join(result)
 
     def _format_recompute_json_validation_errors(self, validation_errors):
-        res = [_("Validation errors:")]
+        res = [self.env._("Validation errors:")]
         for error, record_ids in validation_errors.items():
             ids = ", ".join([str(x) for x in record_ids])
             res.append(f"\n  {error} - IDs: {ids}")
@@ -251,4 +251,4 @@ class SeBinding(models.AbstractModel):
             deleter = work.component(usage="record.exporter.deleter")
             deleter.run()
             delete_ids += work.records.ids
-        return "Exported ids : {}\nDeleted ids : {}".format(export_ids, delete_ids)
+        return f"Exported ids : {export_ids}\nDeleted ids : {delete_ids}"

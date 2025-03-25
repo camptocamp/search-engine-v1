@@ -8,7 +8,6 @@ from odoo.addons.component.core import Component
 
 
 class SeBackendFake(models.Model):
-
     _name = "se.backend.fake"
     _inherit = "se.backend.spec.abstract"
     _description = "Unit Test SE Backend"

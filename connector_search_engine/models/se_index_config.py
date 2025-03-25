@@ -9,7 +9,6 @@ from odoo.addons.base_sparse_field.models.fields import Serialized
 
 # TODO: this part is copied from Elasticsearch but should stay in base module
 class SeIndexConfig(models.Model):
-
     _name = "se.index.config"
     _inherit = ["mail.thread"]
     _description = "Elasticsearch index configuration"

@@ -4,12 +4,12 @@
 
 {
     "name": "Connector Search Engine",
-    "version": "14.0.2.8.5",
+    "version": "18.0.1.0.0",
     "author": "Akretion,"
     "ACSONE SA/NV,"
     "Camptocamp,"
     "Odoo Community Association (OCA)",
-    "website": "https://github.com/OCA/search-engine",
+    "website": "https://github.com/camptocamp/search-engine-v1",
     "license": "AGPL-3",
     "category": "Generic Modules",
     "depends": ["connector", "jsonifier", "server_environment"],

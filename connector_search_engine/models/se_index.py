@@ -3,13 +3,12 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
 
 class SeIndex(models.Model):
-
     _name = "se.index"
     _description = "Se Index"
 
@@ -133,7 +132,7 @@ class SeIndex(models.Model):
 
     def _jobify_batch_export(self, force_export=False):
         self.ensure_one()
-        description = _("Prepare a batch export of index '%s'") % self.name
+        description = self.env._("Prepare a batch export of index '%s'") % self.name
         self.with_delay(description=description).batch_export(force_export)
 
     @api.model
@@ -159,10 +158,11 @@ class SeIndex(models.Model):
         while bindings:
             processing = bindings[0 : self.batch_size]  # noqa: E203
             bindings = bindings[self.batch_size :]  # noqa: E203
-            description = _("Export %d records of %d for index '%s'") % (
-                len(processing),
-                bindings_count,
-                self.name,
+            description = self.env._(
+                "Export %(nr)d records of %(count)d for index '%(name)s'",
+                nr=len(processing),
+                count=bindings_count,
+                name=self.name,
             )
             processing.with_delay(description=description).synchronize()
             processing.with_context(connector_no_export=True).write(
@@ -176,11 +176,11 @@ class SeIndex(models.Model):
         while binding_todelete_ids:
             processing = binding_todelete_ids[0 : self.batch_size]  # noqa: E203
             binding_todelete_ids = binding_todelete_ids[self.batch_size :]  # noqa: E203
-            description = _(
-                "Delete %d obsolete records of %d for index '%s'",
-                len(processing),
-                binding_todelete_count,
-                self.name,
+            description = self.env._(
+                "Delete %(nr)d obsoleterecords of %(count)d for index '%(name)s'",
+                nr=len(processing),
+                count=binding_todelete_count,
+                name=self.name,
             )
             processing.with_delay(description=description).synchronize()
 

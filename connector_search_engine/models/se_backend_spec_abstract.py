@@ -4,7 +4,7 @@
 # @author Simone Orsi <simahawk@gmail.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class SeBackendSpecAbstract(models.AbstractModel):
@@ -45,11 +45,11 @@ class SeBackendSpecAbstract(models.AbstractModel):
     @api.model
     def create(self, vals):
         vals["specific_model"] = self._name
-        return super(SeBackendSpecAbstract, self).create(vals)
+        return super().create(vals)
 
     def unlink(self):
         se_backend = self.mapped("se_backend_id")
-        res = super(SeBackendSpecAbstract, self).unlink()
+        res = super().unlink()
         # NOTE: this will delete indexes and bindings by cascade
         se_backend.unlink()
         return res
@@ -66,7 +66,7 @@ class SeBackendSpecAbstract(models.AbstractModel):
         :return: error message if not validated, None if it's all good.
         """
         if not record:
-            return _("The record is empty")
+            return self.env._("The record is empty")
         if not record.get(self._record_id_key):
             # Ensure _record_id_key is set when creating/updating records
-            return _("The key `%(key)s` is missing") % {"key": self._record_id_key}
+            return self.env._("The key `%(key)s` is missing", key=self._record_id_key)

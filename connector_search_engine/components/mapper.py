@@ -16,7 +16,7 @@ class JsonExportMapper(Component):
         :param work: current environment (backend, session, ...)
         :type connector_env: :py:class:`connector.connector.Environment`
         """
-        super(JsonExportMapper, self).__init__(work)
+        super().__init__(work)
         exporter = work.index.exporter_id
         self._json_parser = exporter.get_json_parser()
 

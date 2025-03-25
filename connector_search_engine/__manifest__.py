@@ -26,15 +26,5 @@
         "data/queue_job_channel_data.xml",
         "data/queue_job_function_data.xml",
     ],
-    'external_dependencies': {
-        'python': ['unidecode'],
-    },
-    'data': [
-        'views/se_backend.xml',
-        'views/se_index.xml',
-        'views/se_menu.xml',
-        'data/ir_cron.xml',
-        'security/ir.model.access.csv',
-    ],
     "installable": True,
 }

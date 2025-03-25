@@ -5,7 +5,7 @@ from unittest import mock
 
 from odoo_test_helper import FakeModelLoader
 
-from odoo.tests.common import Form
+from odoo.tests import Form
 from odoo.tools import mute_logger
 
 from .common import TestSeBackendCaseBase

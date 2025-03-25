@@ -73,11 +73,11 @@ class SeBinding(models.AbstractModel):
             return False
         return True
 
-    @api.model
-    def create(self, vals):
-        record = super().create(vals)
-        record.jobify_recompute_json()
-        return record
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        records.jobify_recompute_json()
+        return records
 
     def write(self, vals):
         not_new = self.browse()

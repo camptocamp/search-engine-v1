@@ -6,7 +6,7 @@
         <field name="name">se.index.tree (in connector_search_engine)</field>
         <field name="model">se.index</field>
         <field name="arch" type="xml">
-            <tree name="Index" editable="bottom">
+            <list name="Index" editable="bottom">
                 <field name="custom_tech_name" optional="hide" />
                 <field
                     name="backend_id"
@@ -23,24 +23,27 @@
                 <field name="batch_size" />
                 <button
                     name="force_recompute_all_binding"
+                    title="Force recompute all"
                     help="Force to recompute all binding of the index and set them to the state 'To update'"
                     icon="fa-gears"
                     type="object"
                 />
                 <button
                     name="force_batch_export"
+                    title="Force export all"
                     help="Force the export of all binding"
                     icon="fa-upload"
                     type="object"
                 />
                 <button
                     name="clear_index"
+                    title="Clear indexes"
                     help="Clear the index in the search engine"
                     icon="fa-times"
                     type="object"
                     groups="connector_search_engine.group_connector_search_engine_manager"
                 />
-            </tree>
+            </list>
         </field>
     </record>
     <record model="ir.ui.view" id="se_index_tree_no_backend_view">
@@ -84,7 +87,7 @@
     <record model="ir.actions.act_window" id="se_index_act_window">
         <field name="name">Se Index</field>
         <field name="res_model">se.index</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[]</field>
         <field name="context">{'default_group_by_backend': 1}</field>
     </record>

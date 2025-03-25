@@ -42,10 +42,11 @@ class SeBackendSpecAbstract(models.AbstractModel):
         # won't call the property from `se.backend` because of `inherits` behavior.
         return {"index_prefix_name": {}}
 
-    @api.model
-    def create(self, vals):
-        vals["specific_model"] = self._name
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            vals["specific_model"] = self._name
+        return super().create(vals_list)
 
     def unlink(self):
         se_backend = self.mapped("se_backend_id")

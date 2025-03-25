@@ -24,15 +24,15 @@
         <field name="name">se.index.config.tree (in connector_search_engine)</field>
         <field name="model">se.index.config</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
-            </tree>
+            </list>
         </field>
     </record>
     <record model="ir.actions.act_window" id="se_index_config_act_window">
         <field name="name">Se Index Config</field>
         <field name="res_model">se.index.config</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>

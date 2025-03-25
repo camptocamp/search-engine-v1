@@ -5,7 +5,6 @@ from odoo import api, fields, models, tools
 
 
 class SeBackend(models.Model):
-
     _name = "se.backend"
     _description = "Se Backend"
     _inherit = [
@@ -77,10 +76,9 @@ class SeBackend(models.Model):
             backend_by_rec = {r.se_backend_id: r for r in backends}
             for rec in recs:
                 spec_backend = backend_by_rec.get(rec)
-                rec.specific_backend = "{},{}".format(
-                    spec_backend._name, spec_backend.id
-                )
+                rec.specific_backend = f"{spec_backend._name},{spec_backend.id}"
 
+    # pylint: disable=missing-return
     @api.onchange("tech_name", "index_prefix_name")
     def _onchange_tech_name(self):
         super()._onchange_tech_name()
@@ -90,6 +88,7 @@ class SeBackend(models.Model):
         else:
             self.index_prefix_name = self.tech_name
 
+    # pylint: disable=missing-return
     def _handle_tech_name(self, vals):
         super()._handle_tech_name(vals)
         if not vals.get("index_prefix_name") and vals.get("tech_name"):

@@ -29,7 +29,7 @@ class SeBindingToDelete(models.Model):
     def synchronize(self):
         delete_ids = []
         for index in self.index_id:
-            todelete = self.filtered(lambda rec: rec.index_id == index)
+            todelete = self.filtered(lambda rec, i=index: rec.index_id == i)
             binding_ids = todelete.mapped("binding_id")
             adapter = index._get_backend_adapter()
             adapter.delete(binding_ids)

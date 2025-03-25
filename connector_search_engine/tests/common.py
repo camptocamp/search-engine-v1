@@ -5,9 +5,9 @@ import logging
 from urllib import parse as urlparse
 
 from odoo import tools
-from odoo.modules.module import get_resource_path
+from odoo.tools import file_path
 
-from odoo.addons.component.tests.common import SavepointComponentCase
+from odoo.addons.component.tests.common import TransactionComponentCase
 
 # mute `test_queue_job_no_delay` logging
 logging.getLogger("odoo.addons.queue_job.models.base").setLevel("CRITICAL")
@@ -15,9 +15,9 @@ logging.getLogger("odoo.addons.queue_job.models.base").setLevel("CRITICAL")
 
 def load_xml(env, module, filepath):
     tools.convert_file(
-        env.cr,
+        env,
         module,
-        get_resource_path(module, filepath),
+        file_path(filepath),
         {},
         mode="init",
         noupdate=False,
@@ -25,7 +25,7 @@ def load_xml(env, module, filepath):
     )
 
 
-class TestSeBackendCaseBase(SavepointComponentCase):
+class TestSeBackendCaseBase(TransactionComponentCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -33,14 +33,14 @@ class TestSeBackendCaseBase(SavepointComponentCase):
             context=dict(
                 cls.env.context,
                 tracking_disable=True,  # speed up tests
-                test_queue_job_no_delay=True,  # no jobs thanks
+                queue_job__no_delay=True,  # no jobs thanks
             )
         )
         cls.se_index_model = cls.env["se.index"]
 
     @classmethod
     def _load_fixture(cls, fixture, module="connector_search_engine"):
-        load_xml(cls.env, module, "tests/fixtures/%s" % fixture)
+        load_xml(cls.env, module, f"{module}/tests/fixtures/{fixture}")
 
     @staticmethod
     def parse_path(url):

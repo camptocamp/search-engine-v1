@@ -8,7 +8,6 @@ from odoo.addons.component.core import Component
 
 
 class SeBackendFake(models.Model):
-
     _name = "se.backend.fake"
     _inherit = "se.backend.spec.abstract"
     _description = "Unit Test SE Backend"
@@ -75,7 +74,6 @@ class BindingResPartnerFake(models.Model):
     _inherits = {"res.partner": "record_id"}
     # we need to reference this model for the index
 
-    # TODO: use autosetup fields to handle these fields in mixins
     record_id = fields.Many2one(
         comodel_name="res.partner",
         string="Odoo record",
@@ -95,12 +93,10 @@ class ResPartnerFake(models.Model):
     _name = "res.partner"
     _inherit = "res.partner"
 
-    # TODO: use autosetup fields to handle these fields in mixins
     binding_ids = fields.One2many(
         comodel_name=BindingResPartnerFake._name,
         inverse_name="record_id",
         copy=False,
         string="Bindings",
         context={"active_test": False},
-        manual=True,  # required to make teardown work
     )

@@ -22,10 +22,6 @@
         <field name="export_id" ref="ir_exp_partner_test" />
         <field name="name">lang</field>
     </record>
-    <record id="ir_exp_partner_line_test4" model="ir.exports.line">
-        <field name="export_id" ref="ir_exp_partner_test" />
-        <field name="name">credit_limit</field>
-    </record>
     <record id="ir_exp_partner_line_test5" model="ir.exports.line">
         <field name="export_id" ref="ir_exp_partner_test" />
         <field name="name">color</field>

@@ -7,7 +7,6 @@ from ..utils import data_merge
 
 
 class SeIndex(models.Model):
-
     _inherit = "se.index"
 
     def _get_settings(self):

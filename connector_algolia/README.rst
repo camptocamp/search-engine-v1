@@ -16,21 +16,21 @@ Algolia Connector
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsearch--engine-lightgray.png?logo=github
-    :target: https://github.com/OCA/search-engine/tree/14.0/connector_algolia
-    :alt: OCA/search-engine
+.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsearch--engine--v1-lightgray.png?logo=github
+    :target: https://github.com/OCA/search-engine-v1/tree/18.0/connector_algolia
+    :alt: OCA/search-engine-v1
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/search-engine-14-0/search-engine-14-0-connector_algolia
+    :target: https://translation.odoo-community.org/projects/search-engine-v1-18-0/search-engine-v1-18-0-connector_algolia
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/search-engine&target_branch=14.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/search-engine-v1&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 Base module to synchronize Algolia search engine with Odoo.
 
-Depends on `connector_search_engine`.
+Depends on connector_search_engine.
 
 **Table of contents**
 
@@ -48,17 +48,17 @@ Changelog
 =========
 
 12.0.x.y.z (YYYY-MM-DD)
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 TODO
 
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/search-engine/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/OCA/search-engine-v1/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/search-engine/issues/new?body=module:%20connector_algolia%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/search-engine-v1/issues/new?body=module:%20connector_algolia%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -66,21 +66,21 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Akretion
 * ACSONE SA/NV
 * Camptocamp
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Sébastien BEAU <sebastien.beau@akretion.com>
-* Laurent Mignon <laurent.mignon@acsone.eu>
-* Simone Orsi <simone.orsi@camptocamp.com>
+- Sébastien BEAU <sebastien.beau@akretion.com>
+- Laurent Mignon <laurent.mignon@acsone.eu>
+- Simone Orsi <simone.orsi@camptocamp.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -92,6 +92,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/search-engine <https://github.com/OCA/search-engine/tree/14.0/connector_algolia>`_ project on GitHub.
+This module is part of the `OCA/search-engine-v1 <https://github.com/OCA/search-engine-v1/tree/18.0/connector_algolia>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

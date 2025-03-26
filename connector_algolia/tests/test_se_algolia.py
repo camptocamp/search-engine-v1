@@ -4,8 +4,8 @@
 import json
 import os
 from time import sleep
+from unittest import mock
 
-import mock
 from vcr_unittest import VCRMixin
 
 from odoo.tools import human_size, mute_logger

@@ -11,7 +11,7 @@
     "ACSONE SA/NV,"
     "Camptocamp,"
     "Odoo Community Association (OCA)",
-    "website": "https://github.com/OCA/search-engine",
+    "website": "https://github.com/camptocamp/search-engine-v1",
     "license": "AGPL-3",
     "depends": [
         "connector_search_engine",

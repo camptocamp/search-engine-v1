@@ -70,6 +70,7 @@ class SeAdapterFake(Component):
 
 class BindingResPartnerFake(models.Model):
     _name = "res.partner.binding.fake"
+    _description = _name
     _inherit = ["se.binding"]
     _inherits = {"res.partner": "record_id"}
     # we need to reference this model for the index

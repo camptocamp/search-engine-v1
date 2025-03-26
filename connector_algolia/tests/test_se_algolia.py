@@ -6,8 +6,10 @@ import os
 from time import sleep
 from unittest import mock
 
+import werkzeug
 from vcr_unittest import VCRMixin
 
+from odoo.tests.common import _super_send
 from odoo.tools import human_size, mute_logger
 
 from odoo.addons.connector_search_engine.tests.test_all import TestBindingIndexBase
@@ -38,6 +40,13 @@ class TestAlgoliaBackend(VCRMixin, TestBindingIndexBase):
         cls.setup_records()
         with cls.backend_specific.work_on("se.index", index=cls.se_index) as work:
             cls.adapter = work.component(usage="se.backend.adapter")
+
+    @classmethod
+    def _request_handler(cls, s, r, **kw):
+        url = werkzeug.urls.url_parse(r.url)
+        if url.host.endswith("algolia.net"):
+            return _super_send(s, r, **kw)
+        return super()._request_handler(s, r, **kw)
 
     def _get_vcr_kwargs(self, **kwargs):
         return {

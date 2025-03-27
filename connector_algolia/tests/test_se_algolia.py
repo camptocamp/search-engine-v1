@@ -74,7 +74,7 @@ class TestAlgoliaBackend(VCRMixin, TestBindingIndexBase):
         )
         request_data = json.loads(request.body.decode("utf-8"))["requests"]
         self.assertEqual(len(request_data), 1)
-        self.assertEqual(request_data[0]["action"], "updateObject")
+        self.assertEqual(request_data[0]["action"], "addObject")
         self.assertEqual(request_data[0]["body"], data)
 
     def test_index_adapter_clear(self):
@@ -120,9 +120,8 @@ class TestAlgoliaBackend(VCRMixin, TestBindingIndexBase):
         myvcr = self._get_vcr(**kwargs)
         with myvcr.use_cassette(cassette):
             adapter = self.se_index._get_backend_adapter()
-            algolia_index = adapter.get_index()
-            settings = algolia_index.get_settings()
-            self.assertEqual(settings["attributesForFaceting"], ["name"])
+            settings = adapter.get_settings()
+            self.assertEqual(settings.attributes_for_faceting, ["name"])
 
     def test_delete_adapter(self):
         self.adapter.delete(["IamAnObjectID"])
@@ -145,8 +144,9 @@ class TestAlgoliaBackend(VCRMixin, TestBindingIndexBase):
         if self.cassette.dirty:
             # when we record the test we must wait for algolia
             sleep(2)
-        res = [x for x in self.adapter.each()]
-        self.assertEqual(res, data)
+        res = self.adapter.each()
+        res = [x.object_id for x in res.hits]
+        self.assertEqual(res, ["foo"])
 
     @mute_logger("odoo.addons.connector_search_engine.models.se_binding")
     def test_missing_object_key(self):

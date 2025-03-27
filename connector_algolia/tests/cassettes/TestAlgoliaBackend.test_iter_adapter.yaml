@@ -4,19 +4,19 @@ interactions:
     headers:
       Content-Length:
       - '0'
-      Content-Type:
+      content-type:
       - application/json
-      User-Agent:
-      - Algolia for Python (2.5.0); Python (3.7.3)
-      X-Algolia-API-Key:
-      - 4c043afe97c0c6681b20f9c06049fa65
-      X-Algolia-Application-Id:
-      - C04JR8U8Y1
+      user-agent:
+      - Algolia for Python (4.16.0); Python (3.12.0); Search (4.16.0)
+      x-algolia-api-key:
+      - FAKE_KEY
+      x-algolia-application-id:
+      - FAKE_APP
     method: POST
-    uri: https://c04jr8u8y1.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/clear
+    uri: https://FAKE_APP.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/clear
   response:
     body:
-      string: '{"updatedAt":"2021-07-16T16:21:05.884Z","taskID":1068537439001}'
+      string: '{"updatedAt":"2025-03-27T12:24:08.707Z","taskID":878648687001}'
     headers:
       Accept-Encoding:
       - deflate, gzip
@@ -29,11 +29,11 @@ interactions:
       Content-Disposition:
       - inline; filename=a.txt
       Content-Length:
-      - '63'
+      - '62'
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Fri, 16 Jul 2021 16:21:05 GMT
+      - Thu, 27 Mar 2025 12:24:08 GMT
       Server:
       - nginx
       Strict-Transport-Security:
@@ -46,23 +46,23 @@ interactions:
       code: 200
       message: OK
 - request:
-    body: '{"requests": [{"action": "updateObject", "body": {"objectID": "foo"}}]}'
+    body: '{"requests": [{"action": "addObject", "body": {"objectID": "foo"}}]}'
     headers:
       Content-Length:
-      - '71'
-      Content-Type:
+      - '68'
+      content-type:
       - application/json
-      User-Agent:
-      - Algolia for Python (2.5.0); Python (3.7.3)
-      X-Algolia-API-Key:
-      - 4c043afe97c0c6681b20f9c06049fa65
-      X-Algolia-Application-Id:
-      - C04JR8U8Y1
+      user-agent:
+      - Algolia for Python (4.16.0); Python (3.12.0); Search (4.16.0)
+      x-algolia-api-key:
+      - FAKE_KEY
+      x-algolia-application-id:
+      - FAKE_APP
     method: POST
-    uri: https://c04jr8u8y1.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/batch
+    uri: https://FAKE_APP.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/batch
   response:
     body:
-      string: '{"objectIDs":["foo"],"taskID":1068537441001}'
+      string: '{"objectIDs":["foo"],"taskID":878648695001}'
     headers:
       Accept-Encoding:
       - deflate, gzip
@@ -75,11 +75,11 @@ interactions:
       Content-Disposition:
       - inline; filename=a.txt
       Content-Length:
-      - '44'
+      - '43'
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Fri, 16 Jul 2021 16:21:06 GMT
+      - Thu, 27 Mar 2025 12:24:08 GMT
       Server:
       - nginx
       Strict-Transport-Security:
@@ -96,19 +96,19 @@ interactions:
     headers:
       Content-Length:
       - '2'
-      Content-Type:
+      content-type:
       - application/json
-      User-Agent:
-      - Algolia for Python (2.5.0); Python (3.7.3)
-      X-Algolia-API-Key:
-      - 4c043afe97c0c6681b20f9c06049fa65
-      X-Algolia-Application-Id:
-      - C04JR8U8Y1
+      user-agent:
+      - Algolia for Python (4.16.0); Python (3.12.0); Search (4.16.0)
+      x-algolia-api-key:
+      - FAKE_KEY
+      x-algolia-application-id:
+      - FAKE_APP
     method: POST
-    uri: https://c04jr8u8y1-dsn.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/browse
+    uri: https://FAKE_APP-dsn.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/query
   response:
     body:
-      string: '{"hits":[{"objectID":"foo"}],"nbHits":1,"page":0,"nbPages":1,"hitsPerPage":1000,"processingTimeMS":0,"query":"","params":""}'
+      string: '{"hits":[{"objectID":"foo"}],"nbHits":1,"page":0,"nbPages":1,"hitsPerPage":20,"exhaustiveNbHits":true,"exhaustiveTypo":true,"exhaustive":{"nbHits":true,"typo":true},"query":"","params":"","renderingContent":{},"processingTimeMS":1,"processingTimingsMS":{"_request":{"roundTrip":55},"getIdx":{"load":{"total":1},"total":1},"total":1},"serverTimeMS":2}'
     headers:
       Accept-Encoding:
       - deflate, gzip
@@ -121,17 +121,19 @@ interactions:
       Content-Disposition:
       - inline; filename=a.txt
       Content-Length:
-      - '124'
+      - '350'
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Fri, 16 Jul 2021 16:21:08 GMT
+      - Thu, 27 Mar 2025 12:24:11 GMT
       Server:
       - nginx
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       Timing-Allow-Origin:
       - '*'
+      X-Alg-PT:
+      - '1'
       X-Content-Type-Options:
       - nosniff
     status:

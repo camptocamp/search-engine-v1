@@ -1,23 +1,23 @@
 interactions:
 - request:
-    body: '{"requests": [{"action": "updateObject", "body": {"objectID": "IamAnObjectID1",
+    body: '{"requests": [{"action": "addObject", "body": {"objectID": "IamAnObjectID1",
       "foo": "bar"}}]}'
     headers:
       Content-Length:
-      - '96'
-      Content-Type:
+      - '93'
+      content-type:
       - application/json
-      User-Agent:
-      - Algolia for Python (2.5.0); Python (3.7.3)
-      X-Algolia-API-Key:
-      - 4c043afe97c0c6681b20f9c06049fa65
-      X-Algolia-Application-Id:
-      - C04JR8U8Y1
+      user-agent:
+      - Algolia for Python (4.16.0); Python (3.12.0); Search (4.16.0)
+      x-algolia-api-key:
+      - FAKE_KEY
+      x-algolia-application-id:
+      - FAKE_APP
     method: POST
-    uri: https://c04jr8u8y1.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/batch
+    uri: https://FAKE_APP.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/batch
   response:
     body:
-      string: '{"objectIDs":["IamAnObjectID1"],"taskID":1068537414001}'
+      string: '{"objectIDs":["IamAnObjectID1"],"taskID":878646794001}'
     headers:
       Accept-Encoding:
       - deflate, gzip
@@ -30,11 +30,11 @@ interactions:
       Content-Disposition:
       - inline; filename=a.txt
       Content-Length:
-      - '55'
+      - '54'
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Fri, 16 Jul 2021 16:21:03 GMT
+      - Thu, 27 Mar 2025 12:24:05 GMT
       Server:
       - nginx
       Strict-Transport-Security:

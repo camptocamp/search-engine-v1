@@ -5,6 +5,8 @@
 
 import logging
 
+from algoliasearch.search.client import SearchClientSync as SearchClient
+
 from odoo import exceptions
 
 from odoo.addons.component.core import Component
@@ -12,57 +14,52 @@ from odoo.addons.component.core import Component
 _logger = logging.getLogger(__name__)
 
 
-try:
-    from algoliasearch.search_client import SearchClient
-except ImportError:  # pragma: no cover
-    _logger.debug("Can not import algoliasearch")
-
-
 class AlgoliaAdapter(Component):
     _name = "algolia.adapter"
     _inherit = ["se.backend.adapter", "algolia.se.connector"]
     _usage = "se.backend.adapter"
 
-    def get_index(self):
-        client = self._get_client()
-        return self._get_index(client)
+    def __init__(self, work_context):
+        super().__init__(work_context)
+        self.index_name = self.work.index.name
 
     def _get_client(self):
         backend = self.backend_record
         account = backend._get_api_credentials()
-        return SearchClient.create(backend.algolia_app_id, account["password"])
-
-    def _get_index(self, client):
-        return client.init_index(self.work.index.name)
+        return SearchClient(backend.algolia_app_id, account["password"])
 
     def settings(self, force=False):
         """Push advanced settings like facettings attributes."""
         client = self._get_client()
-        index = self._get_index(client)
         data = self.work.index._get_settings()
         if not force:
             # export settings if it is the first creation of the index.
-            indexes = client.list_indexes()
-            index_names = [item.get("name") for item in indexes.get("items", [])]
-            force = index.index_name not in index_names or False
+            indexes = client.list_indices()
+            index_names = [item.name for item in indexes.items]
+            force = self.index_name not in index_names or False
         if data and force:
-            index.set_settings(data)
+            client.set_settings(self.index_name, data)
+
+    def get_settings(self):
+        client = self._get_client()
+        data = client.get_settings(self.index_name)
+        return data
 
     def index(self, records):
-        index = self.get_index()
         for record in records:
             error = self._validate_record(record)
             if error:
                 raise exceptions.ValidationError(error)
-        index.save_objects(records)
+        client = self._get_client()
+        client.save_objects(self.index_name, records)
 
     def delete(self, binding_ids):
-        index = self.get_index()
-        index.delete_objects(binding_ids)
+        client = self._get_client()
+        client.delete_objects(self.index_name, binding_ids)
 
     def clear(self):
-        index = self.get_index()
-        index.clear_objects()
+        client = self._get_client()
+        client.clear_objects(self.index_name)
         self.settings(force=True)
 
     def iter(self):
@@ -71,5 +68,6 @@ class AlgoliaAdapter(Component):
         return self.each()
 
     def each(self):
-        index = self.get_index()
-        return index.browse_objects()
+        # TODO: test me
+        client = self._get_client()
+        return client.search_single_index(self.index_name)

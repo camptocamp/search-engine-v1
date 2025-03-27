@@ -2,19 +2,19 @@ interactions:
 - request:
     body: null
     headers:
-      Content-Type:
+      content-type:
       - application/json
-      User-Agent:
-      - Algolia for Python (2.5.0); Python (3.7.3)
-      X-Algolia-API-Key:
-      - 4c043afe97c0c6681b20f9c06049fa65
-      X-Algolia-Application-Id:
-      - C04JR8U8Y1
+      user-agent:
+      - Algolia for Python (4.16.0); Python (3.12.0); Search (4.16.0)
+      x-algolia-api-key:
+      - FAKE_KEY
+      x-algolia-application-id:
+      - FAKE_APP
     method: GET
-    uri: https://c04jr8u8y1-dsn.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/settings?getVersion=2
+    uri: https://FAKE_APP-dsn.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/settings
   response:
     body:
-      string: '{"minWordSizefor1Typo":4,"minWordSizefor2Typos":8,"hitsPerPage":20,"maxValuesPerFacet":100,"version":2,"attributesToIndex":null,"numericAttributesToIndex":null,"attributesToRetrieve":null,"unretrievableAttributes":null,"optionalWords":null,"attributesForFaceting":["name"],"attributesToSnippet":null,"attributesToHighlight":null,"paginationLimitedTo":1000,"attributeForDistinct":null,"exactOnSingleWordQuery":"attribute","ranking":["typo","geo","words","filters","proximity","attribute","exact","custom"],"customRanking":null,"separatorsToIndex":"","removeWordsIfNoResults":"none","queryType":"prefixLast","highlightPreTag":"<em>","highlightPostTag":"</em>","snippetEllipsisText":"","alternativesAsExact":["ignorePlurals","singleWordSynonym"]}'
+      string: '{"minWordSizefor1Typo":4,"minWordSizefor2Typos":8,"hitsPerPage":20,"maxValuesPerFacet":100,"version":1,"attributesToIndex":null,"numericAttributesToIndex":null,"attributesToRetrieve":null,"unretrievableAttributes":null,"optionalWords":null,"attributesForFaceting":["name"],"attributesToSnippet":null,"attributesToHighlight":null,"paginationLimitedTo":1000,"attributeForDistinct":null,"exactOnSingleWordQuery":"attribute","ranking":["typo","geo","words","filters","proximity","attribute","exact","custom"],"customRanking":null,"separatorsToIndex":"","removeWordsIfNoResults":"none","queryType":"prefixLast","highlightPreTag":"<em>","highlightPostTag":"</em>","alternativesAsExact":["ignorePlurals","singleWordSynonym"]}'
     headers:
       Accept-Encoding:
       - deflate, gzip
@@ -27,11 +27,11 @@ interactions:
       Content-Disposition:
       - inline; filename=a.txt
       Content-Length:
-      - '743'
+      - '718'
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Fri, 16 Jul 2021 16:29:55 GMT
+      - Thu, 27 Mar 2025 12:24:08 GMT
       Server:
       - nginx
       Strict-Transport-Security:

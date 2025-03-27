@@ -13,7 +13,7 @@ def data_merge(a, b):
     """
     key = None
     try:
-        if a is None or isinstance(a, (str, int, float)):
+        if a is None or isinstance(a, str | int | float):
             # border case for first run or if a is a primitive
             a = b
         elif isinstance(a, list):
@@ -37,7 +37,7 @@ def data_merge(a, b):
         else:
             raise NotImplementedError(f'NOT IMPLEMENTED "{b}" into "{a}"')
     except TypeError as e:  # pragma: no cover
-        raise TypeError(f'"{e}" in key "{key}" when merging "{b}" into "{a}"')
+        raise TypeError(f'"{e}" in key "{key}" when merging "{b}" into "{a}"') from e
     return a
 
 

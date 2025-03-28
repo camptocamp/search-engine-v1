@@ -12,6 +12,7 @@
     "website": "https://github.com/camptocamp/search-engine-v1",
     "license": "AGPL-3",
     "category": "Generic Modules",
+    "development_status": "Production/Stable",
     "depends": ["connector", "jsonifier", "server_environment"],
     "external_dependencies": {"python": ["unidecode"]},
     "data": [

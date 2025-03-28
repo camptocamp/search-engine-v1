@@ -13,6 +13,7 @@
     "Odoo Community Association (OCA)",
     "website": "https://github.com/camptocamp/search-engine-v1",
     "license": "AGPL-3",
+    "development_status": "Production/Stable",
     "depends": [
         "connector_search_engine",
         "connector",

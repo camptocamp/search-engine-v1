@@ -1,0 +1,94 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Content-Length:
+      - '0'
+      content-type:
+      - application/json
+      user-agent:
+      - Algolia for Python (4.16.0); Python (3.12.0); Search (4.16.0)
+      x-algolia-api-key:
+      - FAKE_KEY
+      x-algolia-application-id:
+      - FAKE_APP
+    method: POST
+    uri: https://FAKE_APP.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/clear
+  response:
+    body:
+      string: '{"updatedAt":"2025-03-27T12:24:05.848Z","taskID":878647286001}'
+    headers:
+      Accept-Encoding:
+      - deflate, gzip
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline; filename=a.txt
+      Content-Length:
+      - '62'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 27 Mar 2025 12:24:05 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Timing-Allow-Origin:
+      - '*'
+      X-Content-Type-Options:
+      - nosniff
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"attributesForFaceting": ["name"]}'
+    headers:
+      Content-Length:
+      - '35'
+      content-type:
+      - application/json
+      user-agent:
+      - Algolia for Python (4.16.0); Python (3.12.0); Search (4.16.0)
+      x-algolia-api-key:
+      - FAKE_KEY
+      x-algolia-application-id:
+      - FAKE_APP
+    method: PUT
+    uri: https://FAKE_APP.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/settings
+  response:
+    body:
+      string: '{"updatedAt":"2025-03-27T12:24:06.076Z","taskID":878647501001}'
+    headers:
+      Accept-Encoding:
+      - deflate, gzip
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline; filename=a.txt
+      Content-Length:
+      - '62'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 27 Mar 2025 12:24:06 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Timing-Allow-Origin:
+      - '*'
+      X-Content-Type-Options:
+      - nosniff
+    status:
+      code: 200
+      message: OK
+version: 1

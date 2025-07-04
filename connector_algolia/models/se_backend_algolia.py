@@ -38,6 +38,7 @@ class SeBackendAlgolia(models.Model):
     @property
     def _server_env_fields(self):
         env_fields = super()._server_env_fields
+        env_fields.pop("index_prefix_name")
         env_fields.update({"algolia_app_id": {}, "algolia_api_key": {}})
         return env_fields
 

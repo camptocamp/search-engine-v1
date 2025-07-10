@@ -29,12 +29,11 @@ class SeBackendSpecAbstract(models.AbstractModel):
         delegate=True,
         required=True,
     )
-    # This must be re-defined here because
-    # we want to be able to set the prefix based on the specific search engine.
-    index_prefix_name = fields.Char(
-        related="se_backend_id.index_prefix_name",
-        readonly=False,
-    )
+    # This must be defined in the specific backend
+    # because it is used to create the index name.
+    # It is not defined in the abstract model because
+    # it leads to a valley of pain of inherited fields w/ server.env.mixin.
+    # index_prefix_name = fields.Char()
 
     @property
     def _server_env_fields(self):

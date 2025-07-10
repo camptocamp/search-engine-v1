@@ -18,7 +18,6 @@ class SeBackendAlgolia(models.Model):
     _inherit = [
         "se.backend.spec.abstract",
         "server.env.techname.mixin",
-        "server.env.mixin",
     ]
     _description = "Algolia Backend"
 

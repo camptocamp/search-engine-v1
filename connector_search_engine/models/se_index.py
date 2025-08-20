@@ -11,8 +11,15 @@ _logger = logging.getLogger(__name__)
 class SeIndex(models.Model):
     _name = "se.index"
     _description = "Se Index"
+    _rec_names_search = [
+        "backend_id",
+        "backend_id.index_prefix_name",
+        "lang_id",
+        "model_id",
+        "custom_tech_name",
+    ]
 
-    name = fields.Char(compute="_compute_name", store=True)
+    name = fields.Char(compute="_compute_name")
     custom_tech_name = fields.Char(
         help="Take control of index technical name. "
         "The final index name is still computed and contains in any case: "

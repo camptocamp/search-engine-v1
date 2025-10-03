@@ -7,7 +7,7 @@ interactions:
       content-type:
       - application/json
       user-agent:
-      - Algolia for Python (4.16.0); Python (3.12.0); Search (4.16.0)
+      - Algolia for Python (4.28.0); Python (3.12.0); Search (4.28.0)
       x-algolia-api-key:
       - FAKE_KEY
       x-algolia-application-id:
@@ -16,7 +16,7 @@ interactions:
     uri: https://FAKE_APP.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/clear
   response:
     body:
-      string: '{"updatedAt":"2025-03-27T12:24:08.707Z","taskID":878648687001}'
+      string: '{"updatedAt":"2025-10-03T09:59:35.154Z","taskID":1849117445001}'
     headers:
       Accept-Encoding:
       - deflate, gzip
@@ -29,11 +29,11 @@ interactions:
       Content-Disposition:
       - inline; filename=a.txt
       Content-Length:
-      - '62'
+      - '63'
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Thu, 27 Mar 2025 12:24:08 GMT
+      - Fri, 03 Oct 2025 09:59:35 GMT
       Server:
       - nginx
       Strict-Transport-Security:
@@ -46,14 +46,22 @@ interactions:
       code: 200
       message: OK
 - request:
-    body: '{"requests": [{"action": "addObject", "body": {"objectID": "foo"}}]}'
+    body: '{"requests": [{"action": "addObject", "body": {"objectID": "foo0", "id":
+      0}}, {"action": "addObject", "body": {"objectID": "foo1", "id": 1}}, {"action":
+      "addObject", "body": {"objectID": "foo2", "id": 2}}, {"action": "addObject",
+      "body": {"objectID": "foo3", "id": 3}}, {"action": "addObject", "body": {"objectID":
+      "foo4", "id": 4}}, {"action": "addObject", "body": {"objectID": "foo5", "id":
+      5}}, {"action": "addObject", "body": {"objectID": "foo6", "id": 6}}, {"action":
+      "addObject", "body": {"objectID": "foo7", "id": 7}}, {"action": "addObject",
+      "body": {"objectID": "foo8", "id": 8}}, {"action": "addObject", "body": {"objectID":
+      "foo9", "id": 9}}]}'
     headers:
       Content-Length:
-      - '68'
+      - '654'
       content-type:
       - application/json
       user-agent:
-      - Algolia for Python (4.16.0); Python (3.12.0); Search (4.16.0)
+      - Algolia for Python (4.28.0); Python (3.12.0); Search (4.28.0)
       x-algolia-api-key:
       - FAKE_KEY
       x-algolia-application-id:
@@ -62,7 +70,7 @@ interactions:
     uri: https://FAKE_APP.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/batch
   response:
     body:
-      string: '{"objectIDs":["foo"],"taskID":878648695001}'
+      string: '{"objectIDs":["foo0","foo1","foo2","foo3","foo4","foo5","foo6","foo7","foo8","foo9"],"taskID":1849117446001}'
     headers:
       Accept-Encoding:
       - deflate, gzip
@@ -75,11 +83,11 @@ interactions:
       Content-Disposition:
       - inline; filename=a.txt
       Content-Length:
-      - '43'
+      - '108'
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Thu, 27 Mar 2025 12:24:08 GMT
+      - Fri, 03 Oct 2025 09:59:35 GMT
       Server:
       - nginx
       Strict-Transport-Security:
@@ -92,23 +100,23 @@ interactions:
       code: 200
       message: OK
 - request:
-    body: '{}'
+    body: '{"hitsPerPage": 1000}'
     headers:
       Content-Length:
-      - '2'
+      - '21'
       content-type:
       - application/json
       user-agent:
-      - Algolia for Python (4.16.0); Python (3.12.0); Search (4.16.0)
+      - Algolia for Python (4.28.0); Python (3.12.0); Search (4.28.0)
       x-algolia-api-key:
       - FAKE_KEY
       x-algolia-application-id:
       - FAKE_APP
     method: POST
-    uri: https://FAKE_APP-dsn.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/query
+    uri: https://FAKE_APP-dsn.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/browse
   response:
     body:
-      string: '{"hits":[{"objectID":"foo"}],"nbHits":1,"page":0,"nbPages":1,"hitsPerPage":20,"exhaustiveNbHits":true,"exhaustiveTypo":true,"exhaustive":{"nbHits":true,"typo":true},"query":"","params":"","renderingContent":{},"processingTimeMS":1,"processingTimingsMS":{"_request":{"roundTrip":55},"getIdx":{"load":{"total":1},"total":1},"total":1},"serverTimeMS":2}'
+      string: '{"hits":[{"id":9,"objectID":"foo9"},{"id":8,"objectID":"foo8"},{"id":7,"objectID":"foo7"},{"id":6,"objectID":"foo6"},{"id":5,"objectID":"foo5"},{"id":4,"objectID":"foo4"},{"id":3,"objectID":"foo3"},{"id":2,"objectID":"foo2"},{"id":1,"objectID":"foo1"},{"id":0,"objectID":"foo0"}],"nbHits":10,"page":0,"nbPages":1,"hitsPerPage":1000,"processingTimeMS":0,"query":"","params":"hitsPerPage=1000"}'
     headers:
       Accept-Encoding:
       - deflate, gzip
@@ -121,19 +129,17 @@ interactions:
       Content-Disposition:
       - inline; filename=a.txt
       Content-Length:
-      - '350'
+      - '392'
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Thu, 27 Mar 2025 12:24:11 GMT
+      - Fri, 03 Oct 2025 09:59:37 GMT
       Server:
       - nginx
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       Timing-Allow-Origin:
       - '*'
-      X-Alg-PT:
-      - '1'
       X-Content-Type-Options:
       - nosniff
     status:

@@ -34,3 +34,10 @@ class SeAdapter(AbstractComponent):
         # Doesn't matter how the external id is stored on SE side, it should always
         # be a valid odoo id.
         return int(record[self._record_id_key])
+
+    def all_index_record_ids(self):
+        """Return all external record ids in the index.
+
+        :return: list of record ids
+        """
+        raise NotImplementedError()

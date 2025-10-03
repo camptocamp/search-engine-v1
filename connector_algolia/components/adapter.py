@@ -69,7 +69,7 @@ class AlgoliaAdapter(Component):
 
     def each(self):
         client = self._get_client()
-        res = client.search_single_index(self.index_name)
+        res = client.browse_objects(self.index_name, None)
         return res.hits
 
     def external_id(self, record):
@@ -77,6 +77,11 @@ class AlgoliaAdapter(Component):
 
     def all_index_record_ids(self):
         """Return all ids of the records in the index."""
-        client = self._get_client()
-        res = client.search_single_index(self.index_name)
-        return sorted([hit.id for hit in res.hits])
+        return sorted(
+            [
+                hit.id
+                for hit in self.each()
+                # safeguard for broken records without id
+                if getattr(hit, "id", None) is not None
+            ]
+        )

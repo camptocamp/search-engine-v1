@@ -246,7 +246,17 @@ class SeIndex(models.Model):
             rec_ids = adapter.all_index_record_ids()
             bindings = binding_model.search([("record_id", "in", rec_ids)])
             missing_ids = set(rec_ids) - set(bindings.record_id.ids)
-            index.with_delay().delete_obsolete_item(list(missing_ids))
+            if missing_ids:
+                _logger.info(
+                    "Resynchronize index %s, found %d obsolete items",
+                    index.name,
+                    len(missing_ids),
+                )
+                index.with_delay().delete_obsolete_item(list(missing_ids))
+            else:
+                _logger.info(
+                    "Resynchronize index %s, no obsolete item found", index.name
+                )
 
     def delete_obsolete_item(self, item_ids):
         adapter = self._get_backend_adapter()

@@ -10,7 +10,6 @@ class SeBackend(models.Model):
     _inherit = [
         "connector.backend",
         "server.env.techname.mixin",
-        "server.env.mixin",
     ]
 
     name = fields.Char(required=True)

@@ -33,13 +33,6 @@ class SeBackendAlgolia(models.Model):
     tech_name = fields.Char(
         related="se_backend_id.tech_name", store=True, readonly=False
     )
-    # must be defined here because
-    # `se.backend.algolia` inherits (w/ the final S) from `se.backend.spec.abstract`
-    # but as of odoo 18.0  this cannot work w/ server.env.mixin
-    # as it produces a hell of field nameing and inheritance.
-    # Probably this should be fixed in server env module
-    # but this case is particular to this old implementation of SE backend.
-    index_prefix_name = fields.Char()
 
     @property
     def _server_env_fields(self):

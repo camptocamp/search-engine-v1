@@ -29,17 +29,6 @@ class SeBackendSpecAbstract(models.AbstractModel):
         delegate=True,
         required=True,
     )
-    # This must be defined in the specific backend
-    # because it is used to create the index name.
-    # It is not defined in the abstract model because
-    # it leads to a valley of pain of inherited fields w/ server.env.mixin.
-    # index_prefix_name = fields.Char()
-
-    @property
-    def _server_env_fields(self):
-        # We need this because calling `super` in the specific backend
-        # won't call the property from `se.backend` because of `inherits` behavior.
-        return {"index_prefix_name": {}}
 
     @api.model_create_multi
     def create(self, vals_list):

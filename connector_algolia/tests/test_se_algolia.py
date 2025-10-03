@@ -148,6 +148,16 @@ class TestAlgoliaBackend(VCRMixin, TestBindingIndexBase):
         res = [x.object_id for x in res]
         self.assertEqual(res, ["foo"])
 
+    def test_all_index_record_ids_adapter(self):
+        data = [{"objectID": f"foo{i}", "id": i} for i in range(1, 11)]
+        self.adapter.clear()
+        self.adapter.index(data)
+        if self.cassette.dirty:
+            # when we record the test we must wait for algolia
+            sleep(2)
+        res = self.adapter.all_index_record_ids()
+        self.assertEqual(res, list(range(1, 11)))
+
     @mute_logger("odoo.addons.connector_search_engine.models.se_binding")
     def test_missing_object_key(self):
         self.record_id_export_line.unlink()

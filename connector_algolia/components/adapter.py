@@ -74,3 +74,9 @@ class AlgoliaAdapter(Component):
 
     def external_id(self, record):
         return record.id
+
+    def all_index_record_ids(self):
+        """Return all ids of the records in the index."""
+        client = self._get_client()
+        res = client.search_single_index(self.index_name)
+        return sorted([hit.id for hit in res.hits])

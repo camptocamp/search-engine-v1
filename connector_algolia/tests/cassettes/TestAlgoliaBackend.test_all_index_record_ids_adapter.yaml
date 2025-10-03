@@ -1,0 +1,150 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Content-Length:
+      - '0'
+      content-type:
+      - application/json
+      user-agent:
+      - Algolia for Python (4.28.0); Python (3.12.0); Search (4.28.0)
+      x-algolia-api-key:
+      - FAKE_KEY
+      x-algolia-application-id:
+      - FAKE_APP
+    method: POST
+    uri: https://t4pk6i7zca.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/clear
+  response:
+    body:
+      string: '{"updatedAt":"2025-10-03T08:18:47.813Z","taskID":1849089102001}'
+    headers:
+      Accept-Encoding:
+      - deflate, gzip
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline; filename=a.txt
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 03 Oct 2025 08:18:47 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Timing-Allow-Origin:
+      - '*'
+      X-Content-Type-Options:
+      - nosniff
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"requests": [{"action": "addObject", "body": {"objectID": "foo1", "id":
+      1}}, {"action": "addObject", "body": {"objectID": "foo2", "id": 2}}, {"action":
+      "addObject", "body": {"objectID": "foo3", "id": 3}}, {"action": "addObject",
+      "body": {"objectID": "foo4", "id": 4}}, {"action": "addObject", "body": {"objectID":
+      "foo5", "id": 5}}, {"action": "addObject", "body": {"objectID": "foo6", "id":
+      6}}, {"action": "addObject", "body": {"objectID": "foo7", "id": 7}}, {"action":
+      "addObject", "body": {"objectID": "foo8", "id": 8}}, {"action": "addObject",
+      "body": {"objectID": "foo9", "id": 9}}, {"action": "addObject", "body": {"objectID":
+      "foo10", "id": 10}}]}'
+    headers:
+      Content-Length:
+      - '656'
+      content-type:
+      - application/json
+      user-agent:
+      - Algolia for Python (4.28.0); Python (3.12.0); Search (4.28.0)
+      x-algolia-api-key:
+      - 7b9a8a964f3cf831ed5313c105833f35
+      x-algolia-application-id:
+      - T4PK6I7ZCA
+    method: POST
+    uri: https://t4pk6i7zca.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/batch
+  response:
+    body:
+      string: '{"objectIDs":["foo1","foo2","foo3","foo4","foo5","foo6","foo7","foo8","foo9","foo10"],"taskID":1849089103001}'
+    headers:
+      Accept-Encoding:
+      - deflate, gzip
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline; filename=a.txt
+      Content-Length:
+      - '109'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 03 Oct 2025 08:18:47 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Timing-Allow-Origin:
+      - '*'
+      X-Content-Type-Options:
+      - nosniff
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{}'
+    headers:
+      Content-Length:
+      - '2'
+      content-type:
+      - application/json
+      user-agent:
+      - Algolia for Python (4.28.0); Python (3.12.0); Search (4.28.0)
+      x-algolia-api-key:
+      - 7b9a8a964f3cf831ed5313c105833f35
+      x-algolia-application-id:
+      - T4PK6I7ZCA
+    method: POST
+    uri: https://t4pk6i7zca-dsn.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/query
+  response:
+    body:
+      string: '{"hits":[{"id":9,"objectID":"foo9","_highlightResult":{"id":{"value":"9","matchLevel":"none","matchedWords":[]}}},{"id":8,"objectID":"foo8","_highlightResult":{"id":{"value":"8","matchLevel":"none","matchedWords":[]}}},{"id":7,"objectID":"foo7","_highlightResult":{"id":{"value":"7","matchLevel":"none","matchedWords":[]}}},{"id":6,"objectID":"foo6","_highlightResult":{"id":{"value":"6","matchLevel":"none","matchedWords":[]}}},{"id":5,"objectID":"foo5","_highlightResult":{"id":{"value":"5","matchLevel":"none","matchedWords":[]}}},{"id":4,"objectID":"foo4","_highlightResult":{"id":{"value":"4","matchLevel":"none","matchedWords":[]}}},{"id":3,"objectID":"foo3","_highlightResult":{"id":{"value":"3","matchLevel":"none","matchedWords":[]}}},{"id":2,"objectID":"foo2","_highlightResult":{"id":{"value":"2","matchLevel":"none","matchedWords":[]}}},{"id":10,"objectID":"foo10","_highlightResult":{"id":{"value":"10","matchLevel":"none","matchedWords":[]}}},{"id":1,"objectID":"foo1","_highlightResult":{"id":{"value":"1","matchLevel":"none","matchedWords":[]}}}],"nbHits":10,"page":0,"nbPages":1,"hitsPerPage":20,"exhaustiveNbHits":true,"exhaustiveTypo":true,"exhaustive":{"nbHits":true,"typo":true},"query":"","params":"","renderingContent":{},"processingTimeMS":2,"processingTimingsMS":{"_request":{"roundTrip":39},"getIdx":{"total":1},"total":2},"serverTimeMS":2}'
+    headers:
+      Accept-Encoding:
+      - deflate, gzip
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - inline; filename=a.txt
+      Content-Length:
+      - '1366'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 03 Oct 2025 08:18:50 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Timing-Allow-Origin:
+      - '*'
+      X-Alg-PT:
+      - '1'
+      X-Content-Type-Options:
+      - nosniff
+    status:
+      code: 200
+      message: OK
+version: 1

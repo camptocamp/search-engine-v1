@@ -145,7 +145,7 @@ class TestAlgoliaBackend(VCRMixin, TestBindingIndexBase):
             # when we record the test we must wait for algolia
             sleep(2)
         res = self.adapter.each()
-        res = [x.object_id for x in res.hits]
+        res = [x.object_id for x in res]
         self.assertEqual(res, ["foo"])
 
     @mute_logger("odoo.addons.connector_search_engine.models.se_binding")

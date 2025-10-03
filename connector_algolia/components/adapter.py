@@ -68,6 +68,9 @@ class AlgoliaAdapter(Component):
         return self.each()
 
     def each(self):
-        # TODO: test me
         client = self._get_client()
-        return client.search_single_index(self.index_name)
+        res = client.search_single_index(self.index_name)
+        return res.hits
+
+    def external_id(self, record):
+        return record.id

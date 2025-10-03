@@ -27,6 +27,6 @@
         "security/ir.model.access.csv",
     ],
     "demo": ["demo/backend_demo.xml"],
-    "external_dependencies": {"python": ["algoliasearch>=4.0,<5.0"]},
+    "external_dependencies": {"python": ["algoliasearch>=4.24.0,<5.0"]},
     "installable": True,
 }

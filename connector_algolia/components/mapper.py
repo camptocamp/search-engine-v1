@@ -27,7 +27,6 @@ class AlgoliaJsonExportMapper(Component):
         # the "objectID" is will have the same value as the value of "id"
         #
         # If you need something different you can add a mapping in your exporter
-
-        if self.collection._record_id_key not in res and "id" in res:
-            res[self.collection._record_id_key] = res["id"]
+        if self.collection._record_id_key not in res:
+            res[self.collection._record_id_key] = res.get("id") or map_record.source.id
         return res

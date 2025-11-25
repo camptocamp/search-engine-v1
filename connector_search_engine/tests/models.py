@@ -48,9 +48,15 @@ class SeAdapterFake(Component):
         )
         return [{"id": 42}]
 
+    def all_index_record_ids(self):
+        self._mocked_calls.append(
+            dict(work_ctx=self.work.__dict__, method="all_index_record_ids", args=None)
+        )
+        return self._mocked_results.get("all_index_record_ids", [])
+
     @classmethod
     @contextmanager
-    def mocked_calls(cls):
+    def mocked_calls(cls, mocked_results=None):
         """Handle mocking of calls.
 
         Usage:
@@ -61,8 +67,10 @@ class SeAdapterFake(Component):
                 # do more
         """
         cls._mocked_calls = []
+        cls._mocked_results = mocked_results or {}
         yield cls._mocked_calls
         cls._mocked_calls = []
+        cls._mocked_results = {}
 
 
 # Fake partner binding

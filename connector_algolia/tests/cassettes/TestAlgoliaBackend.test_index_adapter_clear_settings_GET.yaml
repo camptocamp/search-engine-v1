@@ -5,7 +5,7 @@ interactions:
       content-type:
       - application/json
       user-agent:
-      - Algolia for Python (4.16.0); Python (3.12.0); Search (4.16.0)
+      - Algolia for Python (4.28.0); Python (3.12.0); Search (4.28.0)
       x-algolia-api-key:
       - FAKE_KEY
       x-algolia-application-id:
@@ -31,7 +31,7 @@ interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Thu, 27 Mar 2025 12:24:08 GMT
+      - Fri, 03 Oct 2025 09:51:54 GMT
       Server:
       - nginx
       Strict-Transport-Security:

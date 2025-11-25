@@ -204,6 +204,8 @@ class SeBinding(models.AbstractModel):
                     if error:
                         vals["sync_state"] = "to_be_checked"
                         vals["data"]["__error__"] = error
+                    else:
+                        vals["data"].pop("__error__", None)
                     binding.write(vals)
         if validation_errors:
             result.append(

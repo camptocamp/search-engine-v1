@@ -148,14 +148,11 @@ class TestAlgoliaBackend(VCRMixin, TestBindingIndexBase):
         res = [x.object_id for x in res.hits]
         self.assertEqual(res, ["foo"])
 
-    @mute_logger("odoo.addons.connector_search_engine.models.se_binding")
     def test_missing_object_key(self):
         self.record_id_export_line.unlink()
-        result = self.partner_binding.recompute_json()
+        self.partner_binding.recompute_json()
         self.assertEqual(
-            result,
-            "Validation errors:\n\n  "
-            f"The key `objectID` is missing - IDs: {self.partner_binding.id}",
+            self.partner_binding.data["objectID"], self.partner_binding.record_id.id
         )
 
     def test_added_object_key(self):

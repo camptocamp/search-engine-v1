@@ -357,15 +357,26 @@ class TestBindingIndex(TestBindingIndexBaseFake):
         # the resync method will call the delete to remove this obsolete item
         bindings = self.binding_model.search([])
         bindings.write({"sync_state": "new"})
+        new_partner_binding = self.binding_model.create(
+            {
+                "name": "George McFly",
+                "country_id": self.env.ref("base.us").id,
+                "email": "george.mcfly@future.com",
+                "index_id": self.se_index.id,
+            }
+        )
+        ids = [self.partner_binding.record_id.id, new_partner_binding.record_id.id]
         bindings.unlink()
-        with self.se_adapter_fake.mocked_calls() as calls:
+        # Simulate that on the index we still have 2 records but in Odoo only one
+        mocked_results = {"all_index_record_ids": ids}
+        with self.se_adapter_fake.mocked_calls(mocked_results=mocked_results) as calls:
             self.se_index.resynchronize_all_bindings()
             self.assertEqual(len(calls), 2)
             self.assertEqual(calls[0]["work_ctx"]["index"], self.se_index)
-            self.assertEqual(calls[0]["method"], "each")
+            self.assertEqual(calls[0]["method"], "all_index_record_ids")
             self.assertEqual(calls[1]["work_ctx"]["index"], self.se_index)
             self.assertEqual(calls[1]["method"], "delete")
-            self.assertEqual(calls[1]["args"], [42])
+            self.assertEqual(calls[1]["args"], ids[0:1])  # only the existing one
 
     @mute_logger("odoo.addons.connector_search_engine.models.se_binding")
     def test_recompute_json_to_be_checked(self):

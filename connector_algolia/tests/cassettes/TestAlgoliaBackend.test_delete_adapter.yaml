@@ -7,7 +7,7 @@ interactions:
       content-type:
       - application/json
       user-agent:
-      - Algolia for Python (4.16.0); Python (3.12.0); Search (4.16.0)
+      - Algolia for Python (4.28.0); Python (3.12.0); Search (4.28.0)
       x-algolia-api-key:
       - FAKE_KEY
       x-algolia-application-id:
@@ -16,7 +16,7 @@ interactions:
     uri: https://FAKE_APP.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/batch
   response:
     body:
-      string: '{"objectIDs":["IamAnObjectID"],"taskID":878646537001}'
+      string: '{"objectIDs":["IamAnObjectID"],"taskID":1842439024002}'
     headers:
       Accept-Encoding:
       - deflate, gzip
@@ -29,11 +29,11 @@ interactions:
       Content-Disposition:
       - inline; filename=a.txt
       Content-Length:
-      - '53'
+      - '54'
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Thu, 27 Mar 2025 12:24:05 GMT
+      - Fri, 03 Oct 2025 09:51:51 GMT
       Server:
       - nginx
       Strict-Transport-Security:

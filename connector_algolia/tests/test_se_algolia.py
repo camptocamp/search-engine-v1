@@ -115,7 +115,7 @@ class TestAlgoliaBackend(VCRMixin, TestBindingIndexBase):
         # which is needed only to verify the result.
         # If you don't isolate it, you find 3 requests in the main cassette
         # which is not what you expect when running normally.
-        cassette = "TestAlgoliaBackend." "test_index_adapter_clear_settings_GET.yaml"
+        cassette = "TestAlgoliaBackend.test_index_adapter_clear_settings_GET.yaml"
         kwargs = self._get_vcr_kwargs()
         myvcr = self._get_vcr(**kwargs)
         with myvcr.use_cassette(cassette):
@@ -138,15 +138,22 @@ class TestAlgoliaBackend(VCRMixin, TestBindingIndexBase):
         self.assertEqual(request_data[0]["body"], {"objectID": "IamAnObjectID"})
 
     def test_iter_adapter(self):
-        data = [{"objectID": "foo"}]
+        data = [{"objectID": f"foo{i}", "id": i} for i in range(0, 10)]
         self.adapter.clear()
         self.adapter.index(data)
-        if self.cassette.dirty:
-            # when we record the test we must wait for algolia
-            sleep(2)
+        sleep(2)
         res = self.adapter.each()
-        res = [x.object_id for x in res.hits]
-        self.assertEqual(res, ["foo"])
+        res = sorted([x.object_id for x in res])
+        self.assertEqual(res, [f"foo{i}" for i in range(0, 10)])
+
+    def test_all_index_record_ids_adapter(self):
+        data = [{"objectID": f"foo{i}", "id": i} for i in range(0, 10)]
+        self.adapter.clear()
+        self.adapter.index(data)
+        # when we record the test we must wait for algolia
+        sleep(2)
+        res = self.adapter.all_index_record_ids()
+        self.assertEqual(res, list(range(0, 10)))
 
     def test_missing_object_key(self):
         self.record_id_export_line.unlink()

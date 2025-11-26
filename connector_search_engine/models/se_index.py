@@ -240,16 +240,23 @@ class SeIndex(models.Model):
         You can also drop index but this will introduce downtime, so it's
         better to force a resynchronization"""
         for index in self:
-            item_ids = []
             backend = index.backend_id.specific_backend
             adapter = self._get_backend_adapter(backend=backend, index=index)
             binding_model = self.env[index.model_id.model]
-            for index_record in adapter.each():
-                ext_id = adapter.external_id(index_record)
-                binding = binding_model.search([("record_id", "=", ext_id)], limit=1)
-                if not binding:
-                    item_ids.append(ext_id)
-            index.with_delay().delete_obsolete_item(item_ids)
+            rec_ids = adapter.all_index_record_ids()
+            bindings = binding_model.search([("record_id", "in", rec_ids)])
+            missing_ids = set(rec_ids) - set(bindings.record_id.ids)
+            if missing_ids:
+                _logger.info(
+                    "Resynchronize index %s, found %d obsolete items",
+                    index.name,
+                    len(missing_ids),
+                )
+                index.with_delay().delete_obsolete_item(list(missing_ids))
+            else:
+                _logger.info(
+                    "Resynchronize index %s, no obsolete item found", index.name
+                )
 
     def delete_obsolete_item(self, item_ids):
         adapter = self._get_backend_adapter()

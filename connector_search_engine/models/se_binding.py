@@ -7,6 +7,7 @@ import json
 import logging
 import math
 import sys
+import traceback
 
 from odoo import _, api, fields, models
 
@@ -155,7 +156,7 @@ class SeBinding(models.AbstractModel):
                 )
                 return _(
                     "Job have been split because of failure.\nError: {exception}"
-                ).format(exception=str(e))
+                ).format(exception=str(e) + "\n" + traceback.format_exc())
             # We can't systematically reraise here, if we do the new jobs
             # will be discarded.
             raise

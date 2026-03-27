@@ -12,12 +12,11 @@ from .common import TestSeBackendCaseBase
 
 
 class TestBindingIndexBase(TestSeBackendCaseBase, FakeModelLoader):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+    def setUp(self):
+        super().setUp()
         # Load fake models ->/
-        cls.loader = FakeModelLoader(cls.env, cls.__module__)
-        cls.loader.backup_registry()
+        self.loader = FakeModelLoader(self.env, self.__module__)
+        self.loader.backup_registry()
         from .models import (
             BindingResPartnerFake,
             ResPartnerFake,
@@ -25,76 +24,67 @@ class TestBindingIndexBase(TestSeBackendCaseBase, FakeModelLoader):
             SeBackendFake,
         )
 
-        cls.loader.update_registry(
+        self.loader.update_registry(
             (BindingResPartnerFake, ResPartnerFake, SeBackendFake)
         )
-        cls.binding_model = cls.env[BindingResPartnerFake._name]
-        cls.fake_backend_model = cls.env[SeBackendFake._name]
+        self.binding_model = self.env[BindingResPartnerFake._name]
+        self.fake_backend_model = self.env[SeBackendFake._name]
         # ->/ Load fake models
 
-        cls.se_adapter_fake = SeAdapterFake
-        cls._load_fixture("ir_exports_test.xml")
-        cls.exporter = cls.env.ref("connector_search_engine.ir_exp_partner_test")
-        cls.record_id_export_line = cls.env.ref(
+        self.se_adapter_fake = SeAdapterFake
+        self._load_fixture("ir_exports_test.xml")
+        self.exporter = self.env.ref("connector_search_engine.ir_exp_partner_test")
+        self.record_id_export_line = self.env.ref(
             "connector_search_engine.ir_exp_partner_line_test0"
         )
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.loader.restore_registry()
-        super().tearDownClass()
+    def tearDown(self):
+        self.loader.restore_registry()
+        super().tearDown()
 
-    @classmethod
-    def _prepare_index_values(cls, backend=None):
-        backend = backend or cls.backend
+    def _prepare_index_values(self, backend=None):
+        backend = backend or self.backend
         return {
             "name": "Partner Index",
             "backend_id": backend.id,
-            "model_id": cls.env["ir.model"]
+            "model_id": self.env["ir.model"]
             .search([("model", "=", "res.partner.binding.fake")], limit=1)
             .id,
-            "lang_id": cls.env.ref("base.lang_en").id,
-            "exporter_id": cls.exporter.id,
+            "lang_id": self.env.ref("base.lang_en").id,
+            "exporter_id": self.exporter.id,
         }
 
-    @classmethod
-    def setup_records(cls, backend=None):
-        backend = backend or cls.backend
+    def setup_records(self, backend=None):
+        backend = backend or self.backend
         # create an index for partner model
-        cls.se_index = cls.se_index_model.create(cls._prepare_index_values(backend))
+        self.se_index = self.se_index_model.create(self._prepare_index_values(backend))
         # create a binding + partner alltogether
-        cls.partner_binding = cls.binding_model.create(
+        self.partner_binding = self.binding_model.create(
             {
                 "name": "Marty McFly",
-                "country_id": cls.env.ref("base.us").id,
+                "country_id": self.env.ref("base.us").id,
                 "email": "marty.mcfly@future.com",
                 "child_ids": [
                     (0, 0, {"name": "Doc Brown", "email": "docbrown@future.com"})
                 ],
-                "index_id": cls.se_index.id,
+                "index_id": self.se_index.id,
             }
         )
-        cls.partner = cls.partner_binding.record_id
+        self.partner = self.partner_binding.record_id
 
 
 class TestBindingIndexBaseFake(TestBindingIndexBase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.se_adapter_fake._build_component(cls._components_registry)
-
-        cls.backend_specific = cls.fake_backend_model.create(
+    def setUp(self):
+        super().setUp()
+        self.se_adapter_fake._build_component(self._components_registry)
+        self.backend_specific = self.fake_backend_model.create(
             {"name": "Fake SE", "tech_name": "fake_se"}
         )
-        cls.backend = cls.backend_specific.se_backend_id
-        cls.setup_records()
+        self.backend = self.backend_specific.se_backend_id
+        self.setup_records()
 
 
 class TestBindingIndex(TestBindingIndexBaseFake):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-
     # TODO: the following `test_backend*` methods
     # should be splitted to a smaller test case.
     # ATM is not possible since the teardown of this class

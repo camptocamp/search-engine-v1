@@ -25,21 +25,20 @@ from ..utils import get_dict_bytes_size
 
 
 class TestAlgoliaBackend(VCRMixin, TestBindingIndexBase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        AlgoliaAdapter._build_component(cls._components_registry)
-        cls.backend_specific = cls.env.ref("connector_algolia.se_algolia_demo")
-        cls.backend = cls.backend_specific.se_backend_id
-        cls.backend_specific.algolia_app_id = os.environ.get(
+    def setUp(self):
+        super().setUp()
+        AlgoliaAdapter._build_component(self._components_registry)
+        self.backend_specific = self.env.ref("connector_algolia.se_algolia_demo")
+        self.backend = self.backend_specific.se_backend_id
+        self.backend_specific.algolia_app_id = os.environ.get(
             "ALGOLIA_APP_ID", "FAKE_APP"
         )
-        cls.backend_specific.algolia_api_key = os.environ.get(
+        self.backend_specific.algolia_api_key = os.environ.get(
             "ALGOLIA_API_KEY", "FAKE_KEY"
         )
-        cls.setup_records()
-        with cls.backend_specific.work_on("se.index", index=cls.se_index) as work:
-            cls.adapter = work.component(usage="se.backend.adapter")
+        self.setup_records()
+        with self.backend_specific.work_on("se.index", index=self.se_index) as work:
+            self.adapter = work.component(usage="se.backend.adapter")
 
     @classmethod
     def _request_handler(cls, s, r, **kw):

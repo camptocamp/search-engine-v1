@@ -4,6 +4,7 @@
 import json
 import os
 from time import sleep
+from types import SimpleNamespace
 from unittest import mock
 
 import werkzeug
@@ -147,13 +148,44 @@ class TestAlgoliaBackend(VCRMixin, TestBindingIndexBase):
         self.assertEqual(res, [f"foo{i}" for i in range(0, 10)])
 
     def test_all_index_record_ids_adapter(self):
-        data = [{"objectID": f"foo{i}", "id": i} for i in range(0, 10)]
+        data = [{"objectID": str(i), "id": i} for i in range(0, 10)]
         self.adapter.clear()
         self.adapter.index(data)
         # when we record the test we must wait for algolia
         sleep(2)
         res = self.adapter.all_index_record_ids()
         self.assertEqual(res, list(range(0, 10)))
+
+    def _mock_browse_pages(self, pages):
+        """Mock the client to make `browse_objects` return the given pages."""
+
+        def browse_objects(index_name, aggregator, browse_params=None):
+            for page in pages:
+                aggregator(SimpleNamespace(hits=page))
+            return SimpleNamespace(hits=pages[-1])
+
+        client = mock.Mock()
+        client.browse_objects.side_effect = browse_objects
+        return mock.patch.object(type(self.adapter), "_get_client", return_value=client)
+
+    def test_each_all_pages(self):
+        pages = [
+            [SimpleNamespace(object_id=str(i)) for i in range(0, 3)],
+            [SimpleNamespace(object_id=str(i)) for i in range(3, 5)],
+        ]
+        with self._mock_browse_pages(pages):
+            res = self.adapter.each()
+        self.assertEqual([x.object_id for x in res], [str(i) for i in range(0, 5)])
+
+    @mute_logger("odoo.addons.connector_algolia.components.adapter")
+    def test_all_index_record_ids_all_pages(self):
+        pages = [
+            [SimpleNamespace(object_id="3"), SimpleNamespace(object_id="1")],
+            [SimpleNamespace(object_id="not-an-int"), SimpleNamespace(object_id="2")],
+        ]
+        with self._mock_browse_pages(pages):
+            res = self.adapter.all_index_record_ids()
+        self.assertEqual(res, [1, 2, 3])
 
     def test_missing_object_key(self):
         self.record_id_export_line.unlink()

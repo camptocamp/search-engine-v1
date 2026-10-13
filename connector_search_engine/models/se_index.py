@@ -244,7 +244,11 @@ class SeIndex(models.Model):
             adapter = self._get_backend_adapter(backend=backend, index=index)
             binding_model = self.env[index.model_id.model]
             rec_ids = adapter.all_index_record_ids()
-            bindings = binding_model.search([("record_id", "in", rec_ids)])
+            # Archived bindings are excluded on purpose:
+            # their records must not be in the index.
+            bindings = binding_model.search(
+                [("index_id", "=", index.id), ("record_id", "in", rec_ids)]
+            )
             missing_ids = set(rec_ids) - set(bindings.record_id.ids)
             if missing_ids:
                 _logger.info(

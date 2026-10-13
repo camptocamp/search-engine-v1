@@ -380,6 +380,23 @@ class TestBindingIndex(TestBindingIndexBaseFake):
             self.assertEqual(calls[1]["method"], "delete")
             self.assertEqual(calls[1]["args"], ids[0:1])  # only the existing one
 
+    def test_resynchronize_all_bindings_other_index(self):
+        # A binding of the same record in another index
+        # must not hide an obsolete item in this index
+        lang_fr = self.env["res.lang"]._activate_lang("fr_FR")
+        other_index = self.se_index.copy({"lang_id": lang_fr.id})
+        partner = self.partner_binding.record_id
+        self.binding_model.create({"record_id": partner.id, "index_id": other_index.id})
+        self.partner_binding.sync_state = "new"
+        self.partner_binding.unlink()
+        mocked_results = {"all_index_record_ids": [partner.id]}
+        with self.se_adapter_fake.mocked_calls(mocked_results=mocked_results) as calls:
+            self.se_index.resynchronize_all_bindings()
+            self.assertEqual(len(calls), 2)
+            self.assertEqual(calls[1]["work_ctx"]["index"], self.se_index)
+            self.assertEqual(calls[1]["method"], "delete")
+            self.assertEqual(calls[1]["args"], [partner.id])
+
     @mute_logger("odoo.addons.connector_search_engine.models.se_binding")
     def test_recompute_json_to_be_checked(self):
         # When something goes wrong on recomputing index data

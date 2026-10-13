@@ -68,20 +68,32 @@ class AlgoliaAdapter(Component):
         return self.each()
 
     def each(self):
+        """Return all the records of the index, from all pages."""
+        return self._browse_all()
+
+    def _browse_all(self, browse_params=None):
+        """Browse all pages of the index and return all the hits."""
         client = self._get_client()
-        res = client.browse_objects(self.index_name, None)
-        return res.hits
+        hits = []
+        client.browse_objects(
+            self.index_name, lambda resp: hits.extend(resp.hits), browse_params
+        )
+        return hits
 
     def external_id(self, record):
         return record.id
 
     def all_index_record_ids(self):
-        """Return all ids of the records in the index."""
-        return sorted(
-            [
-                hit.id
-                for hit in self.each()
-                # safeguard for broken records without id
-                if getattr(hit, "id", None) is not None
-            ]
-        )
+        """Return the ids (`objectID`) of all the records in the index."""
+        ids = []
+        for hit in self._browse_all({"attributesToRetrieve": ["objectID"]}):
+            try:
+                ids.append(int(hit.object_id))
+            except ValueError:
+                # safeguard for records not created by Odoo
+                _logger.warning(
+                    "Index %s: skip non integer objectID %s",
+                    self.index_name,
+                    hit.object_id,
+                )
+        return sorted(ids)

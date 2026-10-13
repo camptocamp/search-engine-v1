@@ -91,11 +91,17 @@ class SeBinding(models.AbstractModel):
         res = super(SeBinding, self - not_new).write(vals)
         return res
 
+    def _get_se_external_id(self):
+        """Return the id identifying this binding's record in the index."""
+        self.ensure_one()
+        return self.record_id.id
+
     def _prepare_todelete_vals(self):
         self.ensure_one()
         return {
             "index_id": self.index_id.id,
             "binding_id": self.id,
+            "record_id": self._get_se_external_id(),
         }
 
     def unlink(self):

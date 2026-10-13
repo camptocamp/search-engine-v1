@@ -23,16 +23,21 @@ class SeBindingToDelete(models.Model):
     )
     binding_id = fields.Integer(
         string="Binding ID",
+        help="ID of the deleted binding, for reference only.",
+    )
+    record_id = fields.Integer(
+        string="Record ID",
         required=True,
+        help="ID of the record in the index (eg: objectID on Algolia).",
     )
 
     def synchronize(self):
         delete_ids = []
         for index in self.index_id:
             todelete = self.filtered(lambda rec, i=index: rec.index_id == i)
-            binding_ids = todelete.mapped("binding_id")
+            record_ids = todelete.mapped("record_id")
             adapter = index._get_backend_adapter()
-            adapter.delete(binding_ids)
-            delete_ids += binding_ids
+            adapter.delete(record_ids)
+            delete_ids += record_ids
         self.unlink()
         return f"Deleted ids : {delete_ids}"

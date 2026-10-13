@@ -46,15 +46,15 @@ interactions:
       code: 200
       message: OK
 - request:
-    body: '{"requests": [{"action": "addObject", "body": {"objectID": "foo0", "id":
-      0}}, {"action": "addObject", "body": {"objectID": "foo1", "id": 1}}, {"action":
-      "addObject", "body": {"objectID": "foo2", "id": 2}}, {"action": "addObject",
-      "body": {"objectID": "foo3", "id": 3}}, {"action": "addObject", "body": {"objectID":
-      "foo4", "id": 4}}, {"action": "addObject", "body": {"objectID": "foo5", "id":
-      5}}, {"action": "addObject", "body": {"objectID": "foo6", "id": 6}}, {"action":
-      "addObject", "body": {"objectID": "foo7", "id": 7}}, {"action": "addObject",
-      "body": {"objectID": "foo8", "id": 8}}, {"action": "addObject", "body": {"objectID":
-      "foo9", "id": 9}}]}'
+    body: '{"requests": [{"action": "addObject", "body": {"objectID": "0", "id":
+      0}}, {"action": "addObject", "body": {"objectID": "1", "id": 1}}, {"action":
+      "addObject", "body": {"objectID": "2", "id": 2}}, {"action": "addObject",
+      "body": {"objectID": "3", "id": 3}}, {"action": "addObject", "body": {"objectID":
+      "4", "id": 4}}, {"action": "addObject", "body": {"objectID": "5", "id":
+      5}}, {"action": "addObject", "body": {"objectID": "6", "id": 6}}, {"action":
+      "addObject", "body": {"objectID": "7", "id": 7}}, {"action": "addObject",
+      "body": {"objectID": "8", "id": 8}}, {"action": "addObject", "body": {"objectID":
+      "9", "id": 9}}]}'
     headers:
       Content-Length:
       - '654'
@@ -70,7 +70,7 @@ interactions:
     uri: https://FAKE_APP.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/batch
   response:
     body:
-      string: '{"objectIDs":["foo0","foo1","foo2","foo3","foo4","foo5","foo6","foo7","foo8","foo9"],"taskID":1849117398001}'
+      string: '{"objectIDs":["0","1","2","3","4","5","6","7","8","9"],"taskID":1849117398001}'
     headers:
       Accept-Encoding:
       - deflate, gzip
@@ -83,7 +83,7 @@ interactions:
       Content-Disposition:
       - inline; filename=a.txt
       Content-Length:
-      - '108'
+      - '78'
       Content-Type:
       - application/json; charset=UTF-8
       Date:
@@ -116,7 +116,7 @@ interactions:
     uri: https://FAKE_APP-dsn.algolia.net/1/indexes/demo_algolia_backend_res_partner_binding_fake_en_US/browse
   response:
     body:
-      string: '{"hits":[{"id":9,"objectID":"foo9"},{"id":8,"objectID":"foo8"},{"id":7,"objectID":"foo7"},{"id":6,"objectID":"foo6"},{"id":5,"objectID":"foo5"},{"id":4,"objectID":"foo4"},{"id":3,"objectID":"foo3"},{"id":2,"objectID":"foo2"},{"id":1,"objectID":"foo1"},{"id":0,"objectID":"foo0"}],"nbHits":10,"page":0,"nbPages":1,"hitsPerPage":1000,"processingTimeMS":1,"query":"","params":"hitsPerPage=1000"}'
+      string: '{"hits":[{"id":9,"objectID":"9"},{"id":8,"objectID":"8"},{"id":7,"objectID":"7"},{"id":6,"objectID":"6"},{"id":5,"objectID":"5"},{"id":4,"objectID":"4"},{"id":3,"objectID":"3"},{"id":2,"objectID":"2"},{"id":1,"objectID":"1"},{"id":0,"objectID":"0"}],"nbHits":10,"page":0,"nbPages":1,"hitsPerPage":1000,"processingTimeMS":1,"query":"","params":"hitsPerPage=1000"}'
     headers:
       Accept-Encoding:
       - deflate, gzip
@@ -129,7 +129,7 @@ interactions:
       Content-Disposition:
       - inline; filename=a.txt
       Content-Length:
-      - '392'
+      - '362'
       Content-Type:
       - application/json; charset=UTF-8
       Date:

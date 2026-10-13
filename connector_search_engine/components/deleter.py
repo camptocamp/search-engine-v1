@@ -21,6 +21,6 @@ class SeDeleter(Component):
         self.work.records.write(
             {"sync_state": "done", "date_syncronized": fields.Datetime.now()}
         )
-        record_ids = [x.record_id.id for x in self.work.records]
+        record_ids = [x._get_se_external_id() for x in self.work.records]
         if record_ids:
             return self.backend_adapter.delete(record_ids)

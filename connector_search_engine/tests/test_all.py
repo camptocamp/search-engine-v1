@@ -284,21 +284,23 @@ class TestBindingIndex(TestBindingIndexBaseFake):
 
     def test_batch_delete(self):
         # when a binding is unlinked, it should delete it
-        partner_binding_id = self.partner_binding.id
+        partner_id = self.partner_binding.record_id.id
+        # make sure we can't confuse binding and record ids
+        self.assertNotEqual(partner_id, self.partner_binding.id)
         self.partner_binding.unlink()
         self.assertIn(
-            partner_binding_id,
-            self.se_index.binding_todelete_ids.mapped("binding_id"),
-            "Binding should be queued for deletion",
+            partner_id,
+            self.se_index.binding_todelete_ids.mapped("record_id"),
+            "Record should be queued for deletion",
         )
         with self.se_adapter_fake.mocked_calls() as calls:
             self.se_index.batch_export()
             self.assertEqual(len(calls), 1)
             self.assertEqual(calls[0]["method"], "delete")
-            self.assertEqual(calls[0]["args"], [partner_binding_id])
+            self.assertEqual(calls[0]["args"], [partner_id])
         self.assertNotIn(
-            partner_binding_id,
-            self.se_index.binding_todelete_ids.mapped("binding_id"),
+            partner_id,
+            self.se_index.binding_todelete_ids.mapped("record_id"),
             "Binding should've been removed from the delete queue",
         )
 
@@ -314,30 +316,30 @@ class TestBindingIndex(TestBindingIndexBaseFake):
         self.assertEqual(len(self.partner_binding.exists()), 0)
 
     def test_unlink_to_update_inactive_binding(self):
-        partner_binding_id = self.partner_binding.id
+        partner_id = self.partner_binding.record_id.id
         self.partner_binding.active = False
         self.partner_binding.sync_state = "to_update"
         self.partner_binding.unlink()
         self.assertIn(
-            partner_binding_id, self.se_index.binding_todelete_ids.mapped("binding_id")
+            partner_id, self.se_index.binding_todelete_ids.mapped("record_id")
         )
         self.assertEqual(len(self.partner_binding.exists()), 0)
 
     def test_unlink_to_upgrade_active_binding(self):
-        partner_binding_id = self.partner_binding.id
+        partner_id = self.partner_binding.record_id.id
         self.partner_binding.sync_state = "to_update"
         self.partner_binding.unlink()
         self.assertIn(
-            partner_binding_id, self.se_index.binding_todelete_ids.mapped("binding_id")
+            partner_id, self.se_index.binding_todelete_ids.mapped("record_id")
         )
         self.assertEqual(len(self.partner_binding.exists()), 0)
 
     def test_unlink_done_active_binding(self):
-        partner_binding_id = self.partner_binding.id
+        partner_id = self.partner_binding.record_id.id
         self.partner_binding.sync_state = "done"
         self.partner_binding.unlink()
         self.assertIn(
-            partner_binding_id, self.se_index.binding_todelete_ids.mapped("binding_id")
+            partner_id, self.se_index.binding_todelete_ids.mapped("record_id")
         )
         self.assertEqual(len(self.partner_binding.exists()), 0)
 
